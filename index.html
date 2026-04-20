@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Jewelry</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Elegant Jewelry</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Timeless Elegance</h2>
+            <p>Discover our exquisite collection of fine jewelry</p>
+            <a href="#shop" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x300?text=Necklace" alt="Necklace">
+                    <h3>Gold Necklace</h3>
+                    <p>$299.99</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x300?text=Earrings" alt="Earrings">
+                    <h3>Diamond Earrings</h3>
+                    <p>$199.99</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x300?text=Bracelet" alt="Bracelet">
+                    <h3>Silver Bracelet</h3>
+                    <p>$149.99</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x300?text=Ring" alt="Ring">
+                    <h3>Platinum Ring</h3>
+                    <p>$399.99</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x300?text=Watch" alt="Watch">
+                    <h3>Luxury Watch</h3>
+                    <p>$599.99</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x300?text=Pendant" alt="Pendant">
+                    <h3>Heart Pendant</h3>
+                    <p>$99.99</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Elegant Jewelry. All rights reserved.</p>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+        <div id="chat-button">💬</div>
+        <div id="chat-window" class="hidden">
+            <div id="chat-header">
+                <span>Jewelry Assistant</span>
+                <button id="close-chat">×</button>
+            </div>
+            <div id="chat-messages">
+                <div class="message bot">Hello! How can I help you with our jewelry collection today?</div>
+            </div>
+            <input type="text" id="chat-input" placeholder="Type your message...">
+        </div>
+    </div>
+
+    <script>
+        const chatButton = document.getElementById('chat-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatButton.addEventListener('click', () => {
+            chatWindow.classList.toggle('hidden');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage('user', message);
+                    respondToMessage(message);
+                    chatInput.value = '';
+                }
+            }
+        });
+
+        function addMessage(sender, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function respondToMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            let response = '';
+
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                response = 'Hi there! Welcome to Elegant Jewelry. What are you looking for?';
+            } else if (lowerMessage.includes('necklace') || lowerMessage.includes('earrings') || lowerMessage.includes('bracelet') || lowerMessage.includes('ring') || lowerMessage.includes('watch') || lowerMessage.includes('pendant')) {
+                response = 'Great choice! We have a variety of that item. Would you like more details or to see similar products?';
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                response = 'Our prices range from $99 to $599. Check out our featured products section!';
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('call')) {
+                response = 'You can contact us at +91 7993511326 for inquiries.';
+            } else if (lowerMessage.includes('shipping') || lowerMessage.includes('delivery')) {
+                response = 'We offer free shipping on orders over $200. Delivery takes 3-5 business days.';
+            } else if (lowerMessage.includes('return') || lowerMessage.includes('refund')) {
+                response = 'We have a 30-day return policy. Please contact us for assistance.';
+            } else {
+                response = 'I\'m here to help! For more details, please call us at +91 7993511326.';
+            }
+
+            setTimeout(() => addMessage('bot', response), 500);
+        }
+    </script>
+</body>
+</html>
